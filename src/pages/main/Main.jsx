@@ -3,6 +3,7 @@ import NewsBanner from "../../companents/newsBanner/NewsBanner";
 import styles from "./styles.module.css";
 import { getNews } from "../../api/apiNews";
 import NewsList from "../../companents/newsList/NewsList";
+import Skiliton from "../../companents/skiliton/Skiliton";
 
 export default function Main() {
   const [news,setNews]=useState([]);
@@ -25,11 +26,11 @@ const [error, setError] = useState(null);
       }
       featch();
   },[]);
-  if(loading) return <p>....зарузка</p>
+ 
   return<>
   <main className={styles.main}>
-    {news.length>0?<NewsBanner news={news[0]}></NewsBanner>:null}
-    <NewsList news={news}></NewsList>
+    {news.length>0 && !loading?<NewsBanner news={news[0]}></NewsBanner>:<Skiliton count={1}></Skiliton>}
+    {news.length>0 && !loading?<NewsList news={news}></NewsList>:<Skiliton count={10}></Skiliton>}
   </main>
   </>
 }

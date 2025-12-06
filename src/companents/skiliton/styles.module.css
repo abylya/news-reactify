@@ -16,9 +16,9 @@
 }
 
 .banner,.item{
+  background:linear-gradient(-45deg, #ff6b6b, #f7d794, #2a68dbff, #5352ed);
   background-size: 400% 400%;
-  background:linear-gradient(-45deg, #ff6b6b, #f7d794, #70a1ff, #5352ed);
-  animation: pulse 8s ease infinite;
+  animation: pulse 2s ease-in-out infinite;
 }
 
 @keyframes pulse {

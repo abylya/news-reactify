@@ -7,7 +7,7 @@ import Skiliton from "../../companents/skiliton/Skiliton";
 import Pagination from "../../companents/pagination/Pagination";
 import Categories from "../../companents/categories/Categories";
 import Search from "../../companents/search/Search";
-import { debuonse } from "../../helps/debounse.js";
+import { Debuonse } from "../../helps/Debounse.js";
 
 export default function Main() {
   const [news,setNews]=useState([]);
@@ -20,7 +20,7 @@ export default function Main() {
  const pageSize=10;
  const totalPage=10;
 
- const debValue=debuonse(keywords,1500);
+ const debValue=Debuonse(keywords,1500);
  function setCategory(category) {
     setCurrentCategory(category);
  }

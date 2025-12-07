@@ -6,6 +6,8 @@ import NewsList from "../../companents/newsList/NewsList";
 import Skiliton from "../../companents/skiliton/Skiliton";
 import Pagination from "../../companents/pagination/Pagination";
 import Categories from "../../companents/categories/Categories";
+import Search from "../../companents/search/Search";
+import { debuonse } from "../../helps/debounse.js";
 
 export default function Main() {
   const [news,setNews]=useState([]);
@@ -14,10 +16,11 @@ export default function Main() {
  const [currentCategory,setCurrentCategory]=useState('All');
  const [error, setError] = useState(null);
  const[currentPage,setCurrentPage]=useState(1);
-
+ const[keywords,setKeywords]=useState('');
  const pageSize=10;
  const totalPage=10;
 
+ const debValue=debuonse(keywords,1500);
  function setCategory(category) {
     setCurrentCategory(category);
  }
@@ -40,6 +43,7 @@ export default function Main() {
         page_number:currentPage,
         page_size:pageSize,
         category:currentCategory==='All'?null:currentCategory,
+        keywords:debValue,
       }
     );
      
@@ -86,11 +90,12 @@ export default function Main() {
   return () => {
     isMounted = false;
   };
-  },[currentPage,currentCategory]);
+  },[currentPage,currentCategory,debValue]);
  
   
  return <main className={styles.main}>
   <Categories categories={categories} currentCategory={currentCategory} handleCategory={setCategory}></Categories>
+  <Search value={keywords} handleSearch={setKeywords}></Search>
     {news.length>0 && !loading?<NewsBanner news={news[0]}></NewsBanner>:<Skiliton count={1}></Skiliton>}
     <Pagination totalPage={totalPage} handleNextPage={handleNextPage} handlePreviosPage={handlePreviosPage} handleClickPage={handleClickPage} currentPage={currentPage}></Pagination>
     {news.length>0 && !loading?<NewsList news={news}></NewsList>:<Skiliton count={10}></Skiliton>}

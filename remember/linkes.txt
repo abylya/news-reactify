@@ -1,2 +1,3 @@
 
-макет фигма  -https://www.figma.com/design/OrbTJkTIhbtU0P3zZJRceB/Untitled?node-id=1-107&t=xq5pEh1gObo3PgSP-0
+макет фигма  - https://www.figma.com/design/OrbTJkTIhbtU0P3zZJRceB/Untitled?node-id=1-107&t=xq5pEh1gObo3PgSP-0
+gitHub -   https://github.com/MirgradR/news-reactify/blob/main/src/features/category/ui/Categories/Categories.tsx

@@ -6,11 +6,8 @@ const API_KEY=import.meta.env.VITE_NEWS_API_KEY;
 export async function getNews(params) {
   try {
       const respons=await axios.get(`${BASE_URL}search`,{params:{
-        apiKey:API_KEY,...params
-        // page_number:page_number,
-        // page_size:page_size,
-        // category:category,
-      }})
+        apiKey:API_KEY,...params,
+      }});
       return respons.data;
   } catch (error) {
        if (error.response) {

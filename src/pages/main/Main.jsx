@@ -1,105 +1,48 @@
-import { useEffect, useState } from "react";
+
 import NewsBanner from "../../companents/newsBanner/NewsBanner";
 import styles from "./styles.module.css";
-import { getCategories, getNews } from "../../api/apiNews";
 import NewsList from "../../companents/newsList/NewsList";
-import Skiliton from "../../companents/skiliton/Skiliton";
 import Pagination from "../../companents/pagination/Pagination";
 import Categories from "../../companents/categories/Categories";
 import Search from "../../companents/search/Search";
-import { debuonse } from "../../helps/debounse.js";
+import { TOTAL_PAGE, PAGE_SIZE} from "../../constants/constants.js";
+import MayProvider from "../../providers/MayProvider.jsx";
+import useFetch from "../../helps/useFetch.js";
+import { getNews } from "../../api/apiNews.js";
+import useFilter from "../../hooks/useRequestFilter.js";
 
+
+//const NewsContext=createContext([]);
 export default function Main() {
-  const [news,setNews]=useState([]);
- const [loading, setLoading] = useState(true);
- const [categories,setCatigories]=useState([]);
- const [currentCategory,setCurrentCategory]=useState('All');
- const [error, setError] = useState(null);
- const[currentPage,setCurrentPage]=useState(1);
- const[keywords,setKeywords]=useState('');
- const pageSize=10;
- const totalPage=10;
 
- const debValue=debuonse(keywords,1500);
- function setCategory(category) {
-    setCurrentCategory(category);
- }
+ const {requestParam,chengeRequestParam}=useFilter({
+  page_number:1,
+  page_size:PAGE_SIZE,
+  categories:null,
+  keywords:'',
+ })
  
- function handleNextPage() {
-   if(currentPage<totalPage) setCurrentPage((n)=>n+1);
- }
- function handlePreviosPage() {
-   if(currentPage>1) setCurrentPage((n)=>n-1);
- }
+ const {data,loading}=useFetch(getNews,requestParam);
+ const currentPage=data?.page;
 
- function handleClickPage(numberPage) {
-    setCurrentPage(numberPage);
- }
- const fetchNews = async (isMounted,currentPage) => {
-   try {
-     setLoading(true);
-     const response = await getNews(
-      {
-        page_number:currentPage,
-        page_size:pageSize,
-        category:currentCategory==='All'?null:currentCategory,
-        keywords:debValue,
-      }
-    );
-     
-     if (isMounted) {
-       setNews(response.news);
 
-       //console.log(response.news);
-     }
-   } catch (err) {
-     if (isMounted) {
-       setError(err.message);
-       console.log(error);
-     }
-   } finally {
-     if (isMounted) {
-       setLoading(false);
-     }
-   }
- };
- const fetchCategory = async () => {
-   try {
-     
-     const response = await getCategories();
-     
-       setCatigories(['All',...response.categories]);
-       //console.log(response.news);
-     
-   } catch (err) {
-     
-       setError(err.message);
-       console.log(error);
-     
-   } 
-   }
+
  
-  useEffect(()=>{
-    fetchCategory();
-  },[])
-  useEffect(()=>{
-  let isMounted = true;
-  
-  fetchNews(isMounted,currentPage,currentCategory);
-
-  return () => {
-    isMounted = false;
-  };
-  },[currentPage,currentCategory,debValue]);
- 
-  
+ //console.log(currentPage); 
  return <main className={styles.main}>
-  <Categories categories={categories} currentCategory={currentCategory} handleCategory={setCategory}></Categories>
-  <Search value={keywords} handleSearch={setKeywords}></Search>
-    {news.length>0 && !loading?<NewsBanner news={news[0]}></NewsBanner>:<Skiliton count={1}></Skiliton>}
-    <Pagination totalPage={totalPage} handleNextPage={handleNextPage} handlePreviosPage={handlePreviosPage} handleClickPage={handleClickPage} currentPage={currentPage}></Pagination>
-    {news.length>0 && !loading?<NewsList news={news}></NewsList>:<Skiliton count={10}></Skiliton>}
-    <Pagination totalPage={totalPage} handleNextPage={handleNextPage} handlePreviosPage={handlePreviosPage} handleClickPage={handleClickPage} currentPage={currentPage}></Pagination>
+       
+      <Categories changePage={chengeRequestParam} currentCategory={requestParam.categories}></Categories>
+
+      <Search handleSearch={chengeRequestParam}></Search>
+
+      <NewsBanner   news={data&&data.news&&data.news[0]} loading={loading}></NewsBanner>
+
+      <Pagination totalPage={TOTAL_PAGE} changePage={chengeRequestParam} currentPage={currentPage}></Pagination>
+
+      <NewsList  news={data?.news} loading={loading}></NewsList>
+
+      <Pagination totalPage={TOTAL_PAGE} changePage={chengeRequestParam} currentPage={currentPage}></Pagination>
+
   </main>
   
 }

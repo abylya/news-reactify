@@ -1,7 +1,10 @@
-import timeAgo from "../helpers/timeAgo.js";
+import timeAgo from "../../helps/timeAgo.js";
 import Image from "../image/Image";
 import styles from "./styles.module.css";
-export default function NewsBanner({news}) {
+import Skiliton from "../skiliton/Skiliton.jsx";
+import withSkiliton from "../../hocs/withSkiliton.jsx";
+
+ function NewsBanner({news}) {
   return <>
      <div className={styles.news_banner}>
       <Image image={news?.image}></Image>
@@ -10,3 +13,6 @@ export default function NewsBanner({news}) {
      </div>
   </>
 }
+ const WithSkiliton=withSkiliton(NewsBanner,1);
+
+ export default WithSkiliton;

@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
-import { Debuonse } from "../../helps/Debounse";
+import { Debuonse } from "../../helps/Debounse.js";
 import { PAGE_SIZE } from "../../constants/constants";
 
 export default function Search({handleSearch}) {

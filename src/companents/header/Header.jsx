@@ -1,4 +1,4 @@
-import { formatDate } from "../helpers/formatDate";
+import { formatDate } from "../../helps/formatDate";
 import styles from "./styles.module.css";
 export default function Header() {
   return <>

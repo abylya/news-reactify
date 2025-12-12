@@ -1,12 +1,28 @@
 
+import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
+import { Debuonse } from "../../helps/Debounse";
+import { PAGE_SIZE } from "../../constants/constants";
 
-export default function Search({value,handleSearch}) {
-   
+export default function Search({handleSearch}) {
+   const[keywords,setKeywords]=useState('')
+
+   const debouns=Debuonse(keywords,1500);
+ //console.log(debouns);
+   function handleKeywords(e) {
+    const value=e.target.value;
+    setKeywords(value);
+   }
+
+   useEffect(()=>{
+
+      handleSearch('keywords',debouns);
+    
+   },[debouns]);
 
   return<>
      <div className={styles.search}>
-      <input type="text" className={styles.input} value={value} onChange={(e)=>{handleSearch(e.target.value)}} placeholder="java Script"/>
+      <input type="text" className={styles.input} value={keywords} onChange={(e)=>handleKeywords(e)} placeholder="java Script"/>
      </div>
   </>
 }

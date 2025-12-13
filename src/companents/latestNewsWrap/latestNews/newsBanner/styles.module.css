@@ -1,7 +1,9 @@
 .news_banner{
+ 
   display: flex;
-  flex-direction: column;
+  flex-direction:column;
   gap:12px;
+  max-width: 260px;
 }
 
 .title{

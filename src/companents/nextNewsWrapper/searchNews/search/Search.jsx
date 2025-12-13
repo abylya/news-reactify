@@ -1,10 +1,15 @@
 
 import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
+<<<<<<< HEAD:src/companents/nextNewsWrapper/searchNews/search/Search.jsx
+import { Debuonse } from "../../../../helps/Debounse";
+import { PAGE_SIZE } from "../../../../constants/constants";
+=======
 import { Debuonse } from "../../helps/Debounse.js";
 import { PAGE_SIZE } from "../../constants/constants";
+>>>>>>> 99f9538dd63982ebef35ed80a1cfff44846c5b03:src/companents/search/Search.jsx
 
-export default function Search({handleSearch}) {
+export default function Search({changePage}) {
    const[keywords,setKeywords]=useState('')
 
    const debouns=Debuonse(keywords,1500);
@@ -16,7 +21,7 @@ export default function Search({handleSearch}) {
 
    useEffect(()=>{
 
-      handleSearch('keywords',debouns);
+      changePage('keywords',debouns);
     
    },[debouns]);
 

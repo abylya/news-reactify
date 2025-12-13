@@ -1,0 +1,12 @@
+
+
+.news_list{
+  display: flex;
+  gap:32px; 
+  flex-wrap: wrap; 
+}
+
+li{
+   flex:1 1 180px;
+}
+

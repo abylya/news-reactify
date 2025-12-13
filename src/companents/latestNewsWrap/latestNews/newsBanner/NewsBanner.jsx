@@ -1,10 +1,9 @@
-import timeAgo from "../../helps/timeAgo.js";
-import Image from "../image/Image";
+import timeAgo from "../../../../helps/timeAgo.js";
+import Image from "../../../image/Image.jsx";
 import styles from "./styles.module.css";
-import Skiliton from "../skiliton/Skiliton.jsx";
-import withSkiliton from "../../hocs/withSkiliton.jsx";
+import { COUNT_NEWS } from "../../../../constants/constants.js";
 
- function NewsBanner({news}) {
+ export default function NewsBanner({news}) {
   return <>
      <div className={styles.news_banner}>
       <Image image={news?.image}></Image>
@@ -13,6 +12,5 @@ import withSkiliton from "../../hocs/withSkiliton.jsx";
      </div>
   </>
 }
- const WithSkiliton=withSkiliton(NewsBanner,1);
+ 
 
- export default WithSkiliton;

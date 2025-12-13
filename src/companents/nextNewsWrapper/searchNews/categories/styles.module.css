@@ -2,8 +2,7 @@
 
 .list{
   display: flex;
-  gap:8;
-  word-wrap: none;
+  gap:8px;
   width: 100%;
   align-items: flex-start;
   box-sizing: border-box;

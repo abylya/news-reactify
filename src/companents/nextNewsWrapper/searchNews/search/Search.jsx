@@ -1,8 +1,8 @@
 
 import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
-import { Debuonse } from "../../../../helps/Debounse";
-import { PAGE_SIZE } from "../../../../constants/constants";
+import { Debuonse } from "../../../../helps/Debounse.js";
+import { PAGE_SIZE } from "../../../../constants/constants.js";
 
 export default function Search({changePage}) {
    const[keywords,setKeywords]=useState('')

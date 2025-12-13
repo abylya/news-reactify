@@ -1,10 +1,10 @@
 
 import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
-import { Debuonse } from "../../helps/Debounse";
-import { PAGE_SIZE } from "../../constants/constants";
+import { Debuonse } from "../../../../helps/Debounse";
+import { PAGE_SIZE } from "../../../../constants/constants";
 
-export default function Search({handleSearch}) {
+export default function Search({changePage}) {
    const[keywords,setKeywords]=useState('')
 
    const debouns=Debuonse(keywords,1500);
@@ -16,7 +16,7 @@ export default function Search({handleSearch}) {
 
    useEffect(()=>{
 
-      handleSearch('keywords',debouns);
+      changePage('keywords',debouns);
     
    },[debouns]);
 

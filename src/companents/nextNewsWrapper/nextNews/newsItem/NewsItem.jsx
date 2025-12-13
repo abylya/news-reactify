@@ -1,4 +1,4 @@
-import  timeAgo  from "../../helps/timeAgo.js";
+import  timeAgo  from "../../../../helps/timeAgo.js";
 
 import styles from "./styles.module.css";
 export default function NewsItem({news}) {

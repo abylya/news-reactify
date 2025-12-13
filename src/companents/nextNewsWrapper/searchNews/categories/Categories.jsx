@@ -1,8 +1,8 @@
 
 
 import styles from "./styles.module.css";
-import useFetch from "../../helps/useFetch";
-import {getCategories} from "../../api/apiNews";
+import useFetch from "../../../../helps/useFetch";
+import {getCategories} from "../../../../api/apiNews";
 
 export default function Categories({changePage,currentCategory}) {
   
@@ -23,11 +23,11 @@ if(data?.categories.length>0){
   
      <ul className={styles.list}>
       <li key='All'>
-                  <button className={!currentCategory?styles.active:styles.btn_category} onClick={()=>changePage('categories',null)}>All</button>
+                  <button className={!currentCategory?styles.active:styles.btn_category} onClick={()=>changePage('category',null)}>All</button>
               </li>
       {data?.categories.map((item)=>{
         return <li key={item}>
-                  <button className={item===currentCategory?styles.active:styles.btn_category} onClick={()=>changePage('categories',item)}>{item} </button>
+                  <button className={item===currentCategory?styles.active:styles.btn_category} onClick={()=>changePage('category',item)}>{item} </button>
               </li>
       })}
      </ul>

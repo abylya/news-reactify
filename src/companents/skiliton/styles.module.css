@@ -1,11 +1,25 @@
-.list{
+.list_row{
  display: flex;
- flex-direction: column;
- position: relative;
+ gap:12px;
+ flex-wrap: wrap;
+  .item{
+  flex:1 1 180px;
+  height: 180px;
+  margin: 5px 0;
+ }
 }
 
+
+
+.list_colum{
+  display: flex;
+  flex-direction: column;
+ gap:12px;
+}
+
+
 .item{
-  width: 100%;
+  flex:1 1 180px;
   height: 80px;
   margin: 5px 0;
 }

@@ -8,7 +8,7 @@ import withSkiliton from "../../../../hocs/withSkiliton";
 
      <ul className={styles.news_list}>
       {news&&news?.map((item,index)=>{
-       if(index>=COUNT_NEWS) return <NewsItem key={item.id} news={item} loading={loading}></NewsItem>
+       if(index>=COUNT_NEWS) return <li><NewsItem key={item.id} news={item} loading={loading}></NewsItem></li>
       })}
      </ul>
 

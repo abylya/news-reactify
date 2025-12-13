@@ -5,7 +5,7 @@ import { getNews } from "../../api/apiNews.js";
 import useFilter from "../../hooks/useRequestFilter.js";
 import NextNewsWrapper from "../../companents/nextNewsWrapper/NextNewsWrapper";
 import useFetch from "../../helps/useFetch.js";
-import LatestNewsWrap from "../../companents/latestNewsWrap/latestNewsWrap.jsx";
+import LatestNewsWrap from "../../companents/latestNewsWrap/LatestNewsWrap";
 
 
 //const NewsContext=createContext([]);

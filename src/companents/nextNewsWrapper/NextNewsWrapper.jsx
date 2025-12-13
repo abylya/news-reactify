@@ -1,7 +1,7 @@
 
 import styles from "./styles.module.css";
 import NextNews from "./nextNews/NextNews";
-import SearchNews from "./searchNews/searchNews";
+import SearchNews from "./searchNews/SearchNews";
 
 export default function NextNewsWrapper({changePage,currentCategory,currentPage,news,loading}) {
   

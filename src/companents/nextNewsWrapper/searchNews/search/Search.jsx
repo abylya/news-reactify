@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 
 import { Debuonse } from "../../../../helps/debounse.js";
->>>>>>>>> Temporary merge branch 2
+
 
 export default function Search({changePage}) {
    const[keywords,setKeywords]=useState('')

@@ -35,3 +35,19 @@ export async function getCategories() {
   }
   
 }
+
+
+export async function getLatestList() {
+  try {
+      const respons=await axios.get(`${BASE_URL}latest-news`,{params:{
+        apiKey:API_KEY,
+      }});
+      return respons;
+  } catch (error) {
+       if (error.response) {
+      throw new Error(`Ошибка ${error.response.status}: ${error.response.data.message}`);
+    }
+    throw new Error('Ошибка сети');
+    
+  }
+}

@@ -1,9 +1,14 @@
 import styles from "./styles.module.css";
 import LatestNews from "./latestNews/LatestNews";
-export default function LatestNewsWrap({news,loading}) {
+import { getLatestList } from "../../api/apiNews";
+import useFetch from "../../helps/useFetch";
+
+
+export default function LatestNewsWrap() {
+const {data,loading}=useFetch(getLatestList);
 
   return<div className={styles.latest_news_wrap}>
-          <LatestNews news={news} loading={loading}></LatestNews>
+          <LatestNews news={data?.data.news} loading={loading}></LatestNews>
   </div>
   
 }

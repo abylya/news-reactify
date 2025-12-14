@@ -4,9 +4,11 @@
   display: flex;
   gap:32px; 
   flex-wrap: wrap; 
+  height: 1200px;
+  overflow-y: auto;
 }
 
-li{
+.item{
    flex:1 1 180px;
 }
 

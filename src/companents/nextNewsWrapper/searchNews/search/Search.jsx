@@ -1,7 +1,10 @@
 
 import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
+
 import { Debuonse } from "../../../../helps/debounse.js";
+
+
 
 export default function Search({changePage}) {
    const[keywords,setKeywords]=useState('')

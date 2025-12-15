@@ -4,8 +4,7 @@
   display: flex;
   gap:32px; 
   flex-wrap: wrap; 
-  height: 1200px;
-  overflow-y: auto;
+ 
 }
 
 .item{

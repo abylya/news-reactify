@@ -1,3 +1,12 @@
 .latest_news_wrap{
   flex:1 1 420px;
+   height: 1200px;
+  overflow-y: auto;
+}
+
+@media screen and (min-width:900px){
+  .latest_news_wrap{
+   height: 1200px;
+  overflow-y: auto;
+}
 }

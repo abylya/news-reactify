@@ -3,8 +3,9 @@
 import styles from "./styles.module.css";
 import useFetch from "../../../../helps/useFetch";
 import {getCategories} from "../../../../api/apiNews";
+import { forwardRef} from "react";
 
-export default function Categories({changePage,currentCategory}) {
+const Categories=forwardRef(({changePage,currentCategory},ref)=> {
   
    const{data,error,loading}=useFetch(getCategories);
   
@@ -21,7 +22,7 @@ if(data?.categories.length>0){
 
   return<>
   
-     <ul className={styles.list}>
+     <ul ref={ref} className={styles.list}>
       <li key='All'>
                   <button className={!currentCategory?styles.active:styles.btn_category} onClick={()=>changePage('category',null)}>All</button>
               </li>
@@ -33,4 +34,7 @@ if(data?.categories.length>0){
      </ul>
   </>
 }
-}
+})
+
+export default Categories;
+

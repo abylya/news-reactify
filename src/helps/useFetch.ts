@@ -1,15 +1,22 @@
 import { useEffect, useState } from 'react';
+import type { useFetchRez } from '../interfaces';
 
-export default function useFetch(funFetch,param) {
-  const [data, setData] = useState(null);
-  
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+interface FnFech<T,P>{(param?:P):Promise<T>};
+
+
+
+
+
+export default function useFetch<T,P>(funFetch:FnFech<T,P>,param?:P):useFetchRez<T> {
+
+  const [data, setData] = useState<T|undefined>(undefined);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>('');
 
    const paramString=param?new URLSearchParams(param).toString():'';
   // console.log(paramString);
   useEffect(() => {
-    let isMount=true;
+    let isMount:boolean=true;
     const fetchData = async () => {
       try {
         setLoading(true);
@@ -19,10 +26,10 @@ export default function useFetch(funFetch,param) {
            isMount&&setData(response);
            // здесь увидишь, что именно кладёшь
         //console.log(isMount);
-      } catch (err) {
-        console.log(err);
+      } catch (err:Error|any) {
+        console.log(err as Error);
         
-          isMount&&setError(err?.message || 'Error');
+          isMount&&setError(err.message || 'Error');
         
       } finally {  
           isMount&&setLoading(false);
@@ -33,7 +40,7 @@ export default function useFetch(funFetch,param) {
 
     return () => {
       isMount=false;
-      setError(null);
+      setError('');
     };
   }, [funFetch,paramString]);
 

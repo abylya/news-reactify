@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 
-export function Debuonse(value,timeout) {
+export function Debuonse(value:string,timeout:number) {
   const[debValue,setDebValue]=useState(value)
 
   useEffect(()=>{

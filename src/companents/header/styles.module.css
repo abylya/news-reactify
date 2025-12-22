@@ -1,18 +1,31 @@
-.header{
+@import url("https://cdn-uicons.flaticon.com/3.0.0/uicons-bold-rounded/css/uicons-bold-rounded.css");
+
+.header {
   display: flex;
-  width: 100%;
+  justify-content: space-between;
+  align-items: center;
   padding: 12px 24px;
-  background-color:white;
-  flex-direction: column;
-  gap:12px;
-  border-bottom: 1px solid #F2F4F5;
+  background-color: white;
+  border-bottom: 1px solid #f2f4f5;
 }
 
-.title{
+.dark {
+  background-color: #23272f;
+  border-bottom: 1px solid rgb(60, 60, 60);
+  color: #f2f4f5;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.title {
   font-size: 28px;
   font-weight: 800;
 }
 
-p{
+p {
   font-size: 16px;
 }

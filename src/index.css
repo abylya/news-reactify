@@ -14,7 +14,26 @@
 
 
 .conteiner{
-  
   padding: 24px;
   min-height: 100vh;
+}
+
+.app.dark .conteiner{
+  background:#23272f;
+}
+
+.app.light .conteiner{
+  background:white;
+}
+
+.app.dark h1,
+.app.dark h3,
+.app.dark p{
+  color: azure;
+}
+
+.app.light h1,
+.app.light h3,
+.app.light p{
+  color: black;
 }

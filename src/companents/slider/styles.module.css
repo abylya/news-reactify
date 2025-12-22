@@ -5,8 +5,20 @@
   gap:8px;
 }
 
+.dark{
+  background-color: #fff;
+}
+
 .arrow{
   border: none;
   background-color: white;
   cursor: pointer;
+}
+.slider.dark{
+  background-color:#23272f;
+  color:aliceblue ;
+   .arrow{
+    background-color:#23272f;
+  color:aliceblue ;
+   }
 }

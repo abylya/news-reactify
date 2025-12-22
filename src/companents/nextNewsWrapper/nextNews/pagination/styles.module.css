@@ -13,6 +13,12 @@
   border-radius: 4px;
   cursor: pointer;
 }
+.pagination.dark .btn_previos,
+.pagination.dark .btn_next,
+.pagination.dark .btn_page{
+  background:#23272f;
+ color:#fff;
+}
 
 .btn_previos:disabled,
 .btn_next:disabled,

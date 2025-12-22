@@ -1,18 +1,17 @@
-import Header from "./companents/header/Header"
-import Main from "./pages/main/Main"
-
+import Header from "./companents/header/Header";
+import { useTheme } from "./contexts/ThemeContestProvider";
+import Main from "./pages/main/Main";
 
 function App() {
-
-
+  const { isDark } = useTheme();
   return (
-    <>
-<Header></Header>
-<div className="conteiner">
-  <Main></Main>
-</div>
-    </>
-  )
+    <div className={`app ${isDark ? "dark" : "light"}`}>
+      <Header></Header>
+      <div className="conteiner">
+        <Main></Main>
+      </div>
+    </div>
+  );
 }
 
-export default App
+export default App;

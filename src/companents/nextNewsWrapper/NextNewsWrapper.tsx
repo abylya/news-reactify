@@ -5,12 +5,7 @@ import { PAGE_SIZE } from "../../constants/constants";
 import useFilter from "../../hooks/useRequestFilter";
 import { getNews } from "../../api/apiNews";
 import useFetch from "../../helps/useFetch";
-import type {
-  IFiltersNews,
-  IResponsNews,
-  ParamsType,
-  useFetchRez,
-} from "../../interfaces";
+import type { IFiltersNews, IResponsNews } from "../../interfaces";
 
 export default function NextNewsWrapper() {
   const { requestParam, chengeRequestParam } = useFilter({

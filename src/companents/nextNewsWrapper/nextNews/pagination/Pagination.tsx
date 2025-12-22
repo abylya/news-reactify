@@ -1,16 +1,20 @@
 import styles from "./styles.module.css";
 import { TOTAL_PAGE } from "../../../../constants/constants";
 import type { FnChangePage } from "../../../../interfaces";
+import { useTheme } from "../../../../contexts/ThemeContestProvider";
 
 interface IProps {
   changePage: FnChangePage;
   currentPage: number;
 }
 export default function Pagination({ changePage, currentPage }: IProps) {
+  const { isDark } = useTheme();
   const prevNews = currentPage - 1;
   const nextNews = currentPage + 1;
   return (
-    <div className={styles.pagination}>
+    <div
+      className={`${styles.pagination} ${isDark ? styles.dark : styles.light}`}
+    >
       <button
         className={styles.btn_previos}
         onClick={() => changePage("page_number", prevNews)}

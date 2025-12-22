@@ -3,6 +3,7 @@ import styles from "./styles.module.css";
 
 import { Debuonse } from "../../../../helps/debounse.js";
 import type { FnChangePage } from "../../../../interfaces/index.js";
+import { useTheme } from "../../../../contexts/ThemeContestProvider.js";
 
 interface IProps {
   changePage: FnChangePage;
@@ -10,7 +11,7 @@ interface IProps {
 
 export default function Search({ changePage }: IProps) {
   const [keywords, setKeywords] = useState("");
-
+  const { isDark } = useTheme();
   const debouns = Debuonse(keywords, 1500);
   //console.log(debouns);
   function handleKeywords(e: React.ChangeEvent<HTMLInputElement>) {
@@ -24,7 +25,9 @@ export default function Search({ changePage }: IProps) {
 
   return (
     <>
-      <div className={styles.search}>
+      <div
+        className={`${styles.search} ${isDark ? styles.dark : styles.light}`}
+      >
         <input
           type="text"
           className={styles.input}

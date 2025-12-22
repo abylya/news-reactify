@@ -12,6 +12,7 @@ interface IPropsList {
 function NewsList({ news, loading }: IPropsList) {
   return (
     <div className={styles.news_wrap}>
+      {loading && <span></span>}
       <ul className={styles.news_list}>
         {news &&
           news?.map((item) => {

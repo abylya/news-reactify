@@ -11,6 +11,7 @@ interface IProps {
 function LatestNews({ news, loading }: IProps) {
   return (
     <div className={styles.latest_news}>
+      {loading && <span></span>}
       <ul className={styles.news_list}>
         {news?.map((item) => {
           return (

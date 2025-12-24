@@ -1,12 +1,7 @@
 import styles from "./styles.module.css";
-import useFetch from "../../../../helps/useFetch";
-import { getCategories } from "../../../../api/apiNews";
 import { forwardRef, type ForwardedRef } from "react";
-import type {
-  CategoriesType,
-  FnChangePage,
-  IResponsCategories,
-} from "../../../../interfaces";
+import type { CategoriesType, FnChangePage } from "../../../../interfaces";
+import { useGetCategoriesQuery } from "../../../../store/services/newsApi";
 
 interface IProps {
   currentCategory: CategoriesType;
@@ -16,26 +11,24 @@ interface IProps {
 const Categories = forwardRef(
   (
     { changePage, currentCategory }: IProps,
-    ref: ForwardedRef<HTMLUListElement>
+    ref: ForwardedRef<HTMLDivElement>
   ) => {
-    const { data, error, loading } = useFetch<IResponsCategories, null>(
-      getCategories
-    );
+    const { data, isLoading, error } = useGetCategoriesQuery(null);
 
-    if (loading) {
+    if (isLoading) {
       //console.log(loading);
       return <p> Загрузка </p>;
     }
 
     if (error) {
-      return <p> `Ошибка ${error}`</p>;
+      return <p> `Ошибка`</p>;
     }
 
     if (data && data?.categories.length > 0) {
       return (
         <>
-          <ul ref={ref} className={styles.list}>
-            <li key="All">
+          <div ref={ref} className={styles.list}>
+            <span key="All">
               <button
                 className={
                   !currentCategory ? styles.active : styles.btn_category
@@ -44,10 +37,10 @@ const Categories = forwardRef(
               >
                 All
               </button>
-            </li>
+            </span>
             {data?.categories.map((item) => {
               return (
-                <li key={item}>
+                <span key={item}>
                   <button
                     className={
                       item === currentCategory
@@ -58,14 +51,14 @@ const Categories = forwardRef(
                   >
                     {item}{" "}
                   </button>
-                </li>
+                </span>
               );
             })}
-          </ul>
+          </div>
         </>
       );
     }
   }
 );
-
+Categories.displayName = "Categories";
 export default Categories;

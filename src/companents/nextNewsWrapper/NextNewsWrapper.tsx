@@ -3,9 +3,8 @@ import NextNews from "./nextNews/NextNews";
 import SearchNews from "./searchNews/SearchNews";
 import { PAGE_SIZE } from "../../constants/constants";
 import useFilter from "../../hooks/useRequestFilter";
-import { getNews } from "../../api/apiNews";
-import useFetch from "../../helps/useFetch";
-import type { IFiltersNews, IResponsNews } from "../../interfaces";
+
+import { useGetNewsQuery } from "../../store/services/newsApi";
 
 export default function NextNewsWrapper() {
   const { requestParam, chengeRequestParam } = useFilter({
@@ -15,10 +14,7 @@ export default function NextNewsWrapper() {
     keywords: "",
   });
 
-  const { data, loading } = useFetch<IResponsNews, IFiltersNews>(
-    getNews,
-    requestParam
-  );
+  const { data, isLoading } = useGetNewsQuery(requestParam);
   const currentPage = requestParam.page_number;
 
   return (
@@ -32,7 +28,7 @@ export default function NextNewsWrapper() {
         <NextNews
           news={data?.news}
           currentPage={currentPage}
-          loading={loading}
+          loading={isLoading}
           changePage={chengeRequestParam}
         ></NextNews>
       </div>

@@ -5,7 +5,7 @@ import withSkiliton from "../../../hocs/withSkiliton";
 import type { INews } from "../../../interfaces";
 
 interface IProps {
-  news?: INews[];
+  news: INews[];
   loading: boolean;
 }
 function LatestNews({ news, loading }: IProps) {

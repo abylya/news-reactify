@@ -1,15 +1,14 @@
 import styles from "./styles.module.css";
 import LatestNews from "./latestNews/LatestNews";
-import { getLatestList } from "../../api/apiNews";
-import useFetch from "../../helps/useFetch";
-import type { IResponsNews } from "../../interfaces";
+import { useGetLatestNewsQuery } from "../../store/services/newsApi";
+import { useAppSelector } from "../../store";
 
 export default function LatestNewsWrap() {
-  const { data, loading } = useFetch<IResponsNews, null>(getLatestList);
-
+  const { isLoading } = useGetLatestNewsQuery(null);
+  const news = useAppSelector((state) => state.news.news);
   return (
     <div className={styles.latest_news_wrap}>
-      <LatestNews news={data?.news} loading={loading} />
+      <LatestNews news={news} loading={isLoading} />
     </div>
   );
 }

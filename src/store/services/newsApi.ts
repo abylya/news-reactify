@@ -5,25 +5,21 @@ import type {
   IResponsCategories,
   IResponsNews,
 } from "../../interfaces";
+import { setNews } from "../slices/newsSlice";
 const BASE_URL = import.meta.env.VITE_NEWS_BASE_API_URL;
 const API_KEY = import.meta.env.VITE_NEWS_API_KEY;
-// Define a service using a base URL and expected endpoints
+
 export const newsApi = createApi({
   reducerPath: "newsApi",
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   endpoints: (builder) => ({
     getNews: builder.query<IResponsNews, IFiltersNews>({
       query: (params) => {
-        const { page_number = 1, page_size = 10, category, keywords } = params;
         return {
           url: "search",
           params: {
             apiKey: API_KEY,
-            // ...params,
-            page_number,
-            page_size,
-            category,
-            keywords,
+            ...params,
           },
         };
       },
@@ -36,6 +32,13 @@ export const newsApi = createApi({
             apiKey: API_KEY,
           },
         };
+      },
+      async onQueryStarted(_arg, { dispatch, queryFulfilled }) {
+        const rez = await queryFulfilled;
+        const data = rez.data;
+        if (data.news) {
+          dispatch(setNews(data.news));
+        }
       },
     }),
     getCategories: builder.query<IResponsCategories, null>({
@@ -51,7 +54,5 @@ export const newsApi = createApi({
   }),
 });
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
 export const { useGetNewsQuery, useGetLatestNewsQuery, useGetCategoriesQuery } =
   newsApi;

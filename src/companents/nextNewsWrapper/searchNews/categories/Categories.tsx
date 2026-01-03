@@ -1,64 +1,61 @@
 import styles from "./styles.module.css";
-import { forwardRef, type ForwardedRef } from "react";
-import type { CategoriesType, FnChangePage } from "../../../../interfaces";
+import { forwardRef, useState, type ForwardedRef } from "react";
 import { useGetCategoriesQuery } from "../../../../store/services/newsApi";
+import { useAppDispatch } from "../../../../store";
+import { setFilter } from "../../../../store/slices/newsSlice";
 
-interface IProps {
-  currentCategory: CategoriesType;
-  changePage: FnChangePage;
-}
-
-const Categories = forwardRef(
-  (
-    { changePage, currentCategory }: IProps,
-    ref: ForwardedRef<HTMLDivElement>
-  ) => {
-    const { data, isLoading, error } = useGetCategoriesQuery(null);
-
-    if (isLoading) {
-      //console.log(loading);
-      return <p> Загрузка </p>;
-    }
-
-    if (error) {
-      return <p> `Ошибка`</p>;
-    }
-
-    if (data && data?.categories.length > 0) {
-      return (
-        <>
-          <div ref={ref} className={styles.list}>
-            <span key="All">
-              <button
-                className={
-                  !currentCategory ? styles.active : styles.btn_category
-                }
-                onClick={() => changePage("category", null)}
-              >
-                All
-              </button>
-            </span>
-            {data?.categories.map((item) => {
-              return (
-                <span key={item}>
-                  <button
-                    className={
-                      item === currentCategory
-                        ? styles.active
-                        : styles.btn_category
-                    }
-                    onClick={() => changePage("category", item)}
-                  >
-                    {item}{" "}
-                  </button>
-                </span>
-              );
-            })}
-          </div>
-        </>
-      );
-    }
+const Categories = forwardRef(({}, ref: ForwardedRef<HTMLDivElement>) => {
+  const [currentCategory, setCurrentCategory] = useState("");
+  const { data, isLoading, error } = useGetCategoriesQuery(null);
+  const dispatch = useAppDispatch();
+  if (isLoading) {
+    //console.log(loading);
+    return <p> Загрузка </p>;
   }
-);
+
+  if (error) {
+    return <p> `Ошибка`</p>;
+  }
+
+  if (data && data?.categories.length > 0) {
+    return (
+      <>
+        <div ref={ref} className={styles.list}>
+          <span key="All">
+            <button
+              className={!currentCategory ? styles.active : styles.btn_category}
+              onClick={() => {
+                setCurrentCategory("");
+                dispatch(setFilter({ key: "category", value: "All" }));
+              }}
+            >
+              All
+            </button>
+          </span>
+          {data?.categories.map((item) => {
+            return (
+              <span key={item}>
+                <button
+                  className={
+                    item === currentCategory
+                      ? styles.active
+                      : styles.btn_category
+                  }
+                  onClick={() => {
+                    setCurrentCategory(item);
+                    dispatch(setFilter({ key: "category", value: item }));
+                  }}
+                >
+                  {item}{" "}
+                </button>
+              </span>
+            );
+          })}
+        </div>
+      </>
+    );
+  }
+});
+
 Categories.displayName = "Categories";
 export default Categories;

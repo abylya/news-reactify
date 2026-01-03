@@ -1,23 +1,26 @@
 import styles from "./styles.module.css";
 import { TOTAL_PAGE } from "../../../../constants/constants";
-import type { FnChangePage } from "../../../../interfaces";
 import { useTheme } from "../../../../contexts/ThemeContestProvider";
+import { useAppDispatch } from "../../../../store";
+import { setFilter } from "../../../../store/slices/newsSlice";
+import { useState } from "react";
 
-interface IProps {
-  changePage: FnChangePage;
-  currentPage: number;
-}
-export default function Pagination({ changePage, currentPage }: IProps) {
+export default function Pagination() {
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const { isDark } = useTheme();
-  const prevNews = currentPage - 1;
-  const nextNews = currentPage + 1;
+
+  const dispatch = useAppDispatch();
+  function handlePage(page: number) {
+    setCurrentPage(page);
+    dispatch(setFilter({ key: "page_number", value: page }));
+  }
   return (
     <div
       className={`${styles.pagination} ${isDark ? styles.dark : styles.light}`}
     >
       <button
         className={styles.btn_previos}
-        onClick={() => changePage("page_number", prevNews)}
+        onClick={() => handlePage(currentPage - 1)}
         disabled={currentPage <= 1}
       >
         {"<"}
@@ -31,7 +34,7 @@ export default function Pagination({ changePage, currentPage }: IProps) {
               <button
                 className={bool ? styles.btn_action : styles.btn_page}
                 disabled={bool}
-                onClick={() => changePage("page_number", page)}
+                onClick={() => handlePage(page)}
               >
                 {page}
               </button>
@@ -41,7 +44,7 @@ export default function Pagination({ changePage, currentPage }: IProps) {
       </ul>
       <button
         className={styles.btn_next}
-        onClick={() => changePage("page_number", nextNews)}
+        onClick={() => handlePage(currentPage + 1)}
         disabled={currentPage >= TOTAL_PAGE}
       >
         {">"}

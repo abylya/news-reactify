@@ -1,15 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { CategoriesType, IFiltersNews, INews } from "../../interfaces";
+import type { IFiltersNews, INews } from "../../interfaces";
 import { PAGE_SIZE } from "../../constants/constants";
 
-// Define a type for the slice state
 interface State {
   news: INews[];
   filters: IFiltersNews;
 }
 
-// Define the initial state using that type
 const initialState: State = {
   news: [],
   filters: {
@@ -21,11 +19,9 @@ const initialState: State = {
 };
 
 export const newsSlice = createSlice({
-  name: "counter",
-  // `createSlice` will infer the state type from the `initialState` argument
+  name: "news",
   initialState,
   reducers: {
-    // Use the PayloadAction type to declare the contents of `action.payload`
     setNews: (state, action: PayloadAction<INews[]>) => {
       state.news = action.payload;
     },
@@ -34,6 +30,7 @@ export const newsSlice = createSlice({
       action: PayloadAction<{ key: string; value: string | null | number }>
     ) => {
       const { key, value } = action.payload;
+
       state.filters = { ...state.filters, [key]: value };
     },
   },

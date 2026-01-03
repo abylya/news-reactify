@@ -2,25 +2,22 @@ import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 
 import { Debuonse } from "../../../../helps/debounse.js";
-import type { FnChangePage } from "../../../../interfaces/index.js";
 import { useTheme } from "../../../../contexts/ThemeContestProvider.js";
-
-interface IProps {
-  changePage: FnChangePage;
-}
-
-export default function Search({ changePage }: IProps) {
+import { useAppDispatch } from "../../../../store/index.js";
+import { setFilter } from "../../../../store/slices/newsSlice";
+export default function Search() {
   const [keywords, setKeywords] = useState("");
   const { isDark } = useTheme();
   const debouns = Debuonse(keywords, 1500);
-  //console.log(debouns);
+  const dispatch = useAppDispatch();
+
   function handleKeywords(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
     setKeywords(value);
   }
 
   useEffect(() => {
-    changePage("keywords", debouns);
+    dispatch(setFilter({ key: "keywords", value: debouns }));
   }, [debouns]);
 
   return (

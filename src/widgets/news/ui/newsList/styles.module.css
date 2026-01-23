@@ -1,5 +1,13 @@
-.news_list{
+.news_list {
   display: flex;
+  gap: 12px;
+}
+
+.column {
   flex-direction: column;
-  gap:12px;
+}
+
+.row {
+  flex-direction: row;
+  flex-wrap: wrap;
 }

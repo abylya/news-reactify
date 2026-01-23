@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 interface IProps {
   count: number;
-  style: string;
+  style?: string;
 }
 export default function Skiliton({ count, style }: IProps) {
   return count > 1 ? (

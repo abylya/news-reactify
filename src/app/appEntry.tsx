@@ -12,8 +12,5 @@ createRoot(document.getElementById("root")!).render(
         <BaseLayuot />
       </Provider>
     </ThemeProvider>
-    {/* <Test1></Test1> */}
   </StrictMode>
-
-  //  <App />n
 );

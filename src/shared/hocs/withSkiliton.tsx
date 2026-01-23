@@ -1,22 +1,22 @@
 import Skiliton from "../ui/skiliton/Skiliton";
-import type { INews } from "../interfaces";
+import type { T_type } from "@/entities/news";
 
 interface IProps {
   loading: boolean;
-  news: INews[] | undefined;
+  type?: T_type;
+  direction?: string;
 }
 
 export default function withSkiliton<P extends object>(
   Companent: React.ComponentType<P>,
   count: number,
-  style: string
 ) {
   return function WithSkiliton(props: IProps & P) {
-    const { loading, ...restProps } = props;
+    const { loading, direction, type, ...restProps } = props;
     if (loading) {
       return (
         <div>
-          <Skiliton count={count} style={style}></Skiliton>
+          <Skiliton count={count} style={direction}></Skiliton>
         </div>
       );
     }

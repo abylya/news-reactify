@@ -45,7 +45,7 @@ export type CategoriesType =
   | "mobile"
   | "estate"
   | "funny"
-  | "All";
+  | "";
 
 export interface IResponsCategories {
   categories: CategoriesType[];

@@ -82,4 +82,4 @@ export type CategoriesType =
   | "mobile"
   | "estate"
   | "funny"
-  | "All";
+  | "";

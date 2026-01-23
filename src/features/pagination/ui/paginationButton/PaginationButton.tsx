@@ -1,43 +1,40 @@
 import { useTheme } from "@/app/providers/ThemeProvider";
 import styles from "./styles.module.css";
-
-import { useState } from "react";
-import { useAppDispatch } from "@/app/appSotre";
-import { setFilter } from "@/entities/news/model/newsSlice";
-import { TOTAL_PAGE } from "@/shared/constants/constants";
-
-export default function PaginationButton() {
-  const [currentPage, setCurrentPage] = useState<number>(1);
+interface I_props {
+  page: number;
+  chengePage: (num: number) => void;
+  totalPage: number;
+}
+export default function PaginationButton({
+  page,
+  chengePage,
+  totalPage,
+}: I_props) {
   const { isDark } = useTheme();
 
-  const dispatch = useAppDispatch();
-  function handlePage(page: number) {
-    setCurrentPage(page);
-    dispatch(setFilter({ key: "page_number", value: page }));
-  }
   return (
     <div
       className={`${styles.pagination} ${isDark ? styles.dark : styles.light}`}
     >
       <button
         className={styles.btn_previos}
-        onClick={() => handlePage(currentPage - 1)}
-        disabled={currentPage <= 1}
+        onClick={() => chengePage(page - 1)}
+        disabled={page <= 1}
       >
         {"<"}
       </button>
       <ul className={styles.list_page}>
-        {[...Array(TOTAL_PAGE)].map((_, index) => {
-          const page = index + 1;
-          const bool = currentPage === page;
+        {[...Array(totalPage)].map((_, index) => {
+          const pageBtn = index + 1;
+          const bool = pageBtn === page;
           return (
             <li key={index}>
               <button
                 className={bool ? styles.btn_action : styles.btn_page}
                 disabled={bool}
-                onClick={() => handlePage(page)}
+                onClick={() => chengePage(pageBtn)}
               >
-                {page}
+                {pageBtn}
               </button>
             </li>
           );
@@ -45,8 +42,8 @@ export default function PaginationButton() {
       </ul>
       <button
         className={styles.btn_next}
-        onClick={() => handlePage(currentPage + 1)}
-        disabled={currentPage >= TOTAL_PAGE}
+        onClick={() => chengePage(page + 1)}
+        disabled={page >= totalPage}
       >
         {">"}
       </button>

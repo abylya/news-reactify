@@ -5,12 +5,14 @@ import type { IFiltersNews, INews } from "./types";
 
 interface State {
   news: INews[];
+  newsPage: INews | null;
   filters: IFiltersNews;
   loading: boolean;
 }
 
 const initialState: State = {
   news: [],
+  newsPage: null,
   filters: {
     page_number: 1,
     page_size: PAGE_SIZE,
@@ -39,9 +41,13 @@ export const newsSlice = createSlice({
     setLoading(state) {
       state.loading = false;
     },
+    setNewsPage(state, action: PayloadAction<INews>) {
+      state.newsPage = action.payload;
+    },
   },
 });
 
-export const { setNews, setFilter, setLoading } = newsSlice.actions;
+export const { setNews, setFilter, setLoading, setNewsPage } =
+  newsSlice.actions;
 
 export default newsSlice.reducer;

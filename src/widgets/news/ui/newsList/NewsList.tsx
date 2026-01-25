@@ -10,9 +10,16 @@ interface IPropsList {
   loading: boolean;
   type?: T_type;
   direction?: string;
+  viewNewsSlot?: (news: INews) => React.ReactNode;
 }
 
-function NewsList({ news, loading, type, direction }: IPropsList) {
+function NewsList({
+  news,
+  loading,
+  type,
+  direction,
+  viewNewsSlot,
+}: IPropsList) {
   return (
     <ul
       className={`${styles.news_list}  ${
@@ -21,7 +28,14 @@ function NewsList({ news, loading, type, direction }: IPropsList) {
     >
       {loading && <span></span>}
       {news?.map((item) => {
-        return <NewsItem key={item.id} news={item} type={type}></NewsItem>;
+        return (
+          <NewsItem
+            key={item.id}
+            news={item}
+            type={type}
+            viewNewsSlot={viewNewsSlot}
+          ></NewsItem>
+        );
       })}
     </ul>
   );

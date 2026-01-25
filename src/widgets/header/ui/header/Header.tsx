@@ -2,6 +2,7 @@ import { useTheme } from "@/app/providers/ThemeProvider";
 import styles from "./styles.module.css";
 import { formatDate } from "@/shared/helps/formatDate";
 import { themeIcon } from "@/shared/assets";
+import { Link } from "react-router";
 
 export default function Header() {
   // const { isDark, toggleTheme } = useTheme();
@@ -13,7 +14,9 @@ export default function Header() {
         className={`${styles.header} ${isDark ? styles.dark : styles.light}`}
       >
         <div className={styles.info}>
-          <h1 className={styles.title}>React News</h1>
+          <Link to={"/"}>
+            <h1 className={styles.title}>React News</h1>
+          </Link>
           <p>{formatDate(new Date())}</p>
         </div>
         <div className={styles.userBlock}>

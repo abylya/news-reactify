@@ -1,9 +1,7 @@
 import Skiliton from "../ui/skiliton/Skiliton";
-import type { T_type } from "@/entities/news";
 
 interface IProps {
   loading: boolean;
-  type?: T_type;
   direction?: string;
 }
 
@@ -12,7 +10,7 @@ export default function withSkiliton<P extends object>(
   count: number,
 ) {
   return function WithSkiliton(props: IProps & P) {
-    const { loading, direction, type, ...restProps } = props;
+    const { loading, direction, ...restProps } = props;
     if (loading) {
       return (
         <div>
@@ -20,6 +18,6 @@ export default function withSkiliton<P extends object>(
         </div>
       );
     }
-    return <Companent {...(restProps as P)}></Companent>; //<Companent {...restProps}></Companent>
+    return <Companent direction={direction} {...(restProps as P)}></Companent>; //<Companent {...restProps}></Companent>
   };
 }

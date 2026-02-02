@@ -17,8 +17,8 @@ export type T_type = "bunner" | "item";
 export interface IFiltersNews {
   page_number: number;
   page_size: number;
-  category: CategoriesType;
-  keywords: string;
+  category?: CategoriesType;
+  keywords?: string;
   language: string;
 }
 

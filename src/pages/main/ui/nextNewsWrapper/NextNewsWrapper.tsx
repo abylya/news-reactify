@@ -11,15 +11,18 @@ export default function NextNewsWrapper() {
   const { news, isLoading } = useGetNewsQuery(
     { ...requestParam },
     {
-      selectFromResult: ({ data, isLoading, error }) => ({
-        news: data?.news ?? [],
-        isLoading,
-        error,
-      }),
+      selectFromResult: ({ data, isLoading, error }) => {
+        return {
+          news: data?.news ?? [],
+          isLoading,
+          error,
+        };
+      },
       skip: shouldSkip, //true запрос не отправшт
     },
   );
-  //console.log(news);
+  const { data } = useGetNewsQuery(requestParam);
+  console.log(data);
   return (
     <>
       <div className={styles.news_wrapper}>

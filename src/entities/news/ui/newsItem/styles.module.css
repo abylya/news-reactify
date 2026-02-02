@@ -1,11 +1,16 @@
 .item {
+  flex: 1 1 130px;
   display: flex;
   gap: 12px;
 }
 
 .item_bunner {
   flex-direction: column;
-  max-width: 260px;
+  flex-wrap: wrap;
+}
+
+.item_item {
+  flex-direction: row;
 }
 
 .wrapper {
